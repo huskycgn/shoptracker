@@ -1,6 +1,6 @@
-from zenrows import ZenRowsClient
 from cred import API_KEY, TELE_TOKEN, TELE_CHAT_ID
 import telebot
+import cloudscraper
 
 
 def getstorelist(zipcode):
@@ -10,6 +10,13 @@ def getstorelist(zipcode):
     response = client.get(urlstring)
     # print(response.json())
     return response.json()
+
+
+def getstorelistcs(zipcode):
+    url = f"https://www.rewe.de/api/marketsearch?searchTerm={zipcode}"
+    scraper = cloudscraper.create_scraper(delay=10, browser="chrome")
+    result = scraper.get(url).json()
+    return result
 
 
 def send_telegram(message):
