@@ -1,6 +1,7 @@
 from classes import Market, Product
 from funcs import getstorelistcs, send_telegram
 from cred import PATH
+import sys
 
 rawfile = [
     "Cheddar",
@@ -15,8 +16,26 @@ rawfile = [
     "Red Bull",
 ]
 
+argulist = sys.argv
+print(argulist)
 
-marketjson = getstorelistcs(50667)
+errormessage = "No ZIP code provided!\nUsage like: $ main.py -zip 64283"
+
+# script needs argument like:
+# $ main.py -zip 50676
+
+try:
+    if argulist[1] == "-zip":
+        zipcode = argulist[2]
+    else:
+        print(errormessage)
+        exit()
+except IndexError:
+    print(errormessage)
+    exit()
+
+
+marketjson = getstorelistcs(zipcode)
 
 marketdict = marketjson
 
@@ -80,7 +99,7 @@ for w in wantedlist:
             #     p.store.zipcode,
             #     p.store.city,
             #     p.store.openuntil,
-            #)
+            # )
             string_to_send = f"{p.name} \n{p.description} \n{p.price} \n{p.store.name} \n{p.store.street} \n{p.store.zipcode} {p.store.city}"
 
             send_telegram(string_to_send)
