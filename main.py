@@ -79,8 +79,8 @@ for w in wantedlist:
             #     p.store.street,
             #     p.store.zipcode,
             #     p.store.city,
-                # p.store.openuntil,
-            )
+            #     p.store.openuntil,
+            #)
             string_to_send = f"{p.name} \n{p.description} \n{p.price} \n{p.store.name} \n{p.store.street} \n{p.store.zipcode} {p.store.city}"
 
             send_telegram(string_to_send)
