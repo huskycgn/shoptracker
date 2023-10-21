@@ -1,5 +1,4 @@
 from classes import Market, Product
-from requests import request
 from funcs import getstorelist, send_telegram
 
 wantedlist = [
@@ -12,16 +11,12 @@ wantedlist = [
     "Coca-Cola",
     "Beinscheibe",
     "Kohle",
+    "Red Bull",
+    "Mozzarella",
 ]
-
-# marketjson = request(
-#     method="GET", url="https://www.rewe.de/api/marketsearch?searchTerm=50667"
-# )
 
 
 marketjson = getstorelist(50667)
-
-# print(marketjson.json())
 
 marketdict = marketjson
 
@@ -42,23 +37,25 @@ for m in marketdict:
     )
 
 
-marketofferdict = {}
-
 for market in marketinstancelist:
-    # pprint(market.marketid)
-    marketofferdict[market.marketid] = {}
     try:
-        marketoffers = market.getofferszen()
-        for mo in marketoffers:
-            # print(mo["title"])
-            marketofferdict[market.marketid][mo["title"]] = mo["priceData"]["price"]
-            productinstancelist.append(
-                Product(
-                    store=market,
-                    name=mo["title"],
-                    price=mo["priceData"]["price"],
-                )
-            )
+        categories = market.getofferszen()
+        for cat in categories:
+            # print(cat)
+            offerlist = cat["offers"]
+            # print(offerlist)
+            for offer in offerlist:
+                if offer["cellType"] == "DEFAULT" and offer["overline"] == "":
+                    # print(offer)
+                    productinstancelist.append(
+                        Product(
+                            store=market,
+                            name=offer["title"],
+                            price=offer["priceData"]["price"] or None,
+                        )
+                    )
+                else:
+                    continue
     except IndexError:
         continue
 
@@ -75,5 +72,5 @@ for w in wantedlist:
                 p.store.city,
                 p.store.openuntil,
             )
-            string_to_send = f"{p.name} {p.price} {p.store.name} {p.store.street} {p.store.zipcode} {p.store.city} {p.store.openuntil}"
-            send_telegram(string_to_send)
+#             string_to_send = f"{p.name} {p.price} {p.store.name} {p.store.street} {p.store.zipcode} {p.store.city} {p.store.openuntil}"
+# send_telegram(string_to_send)
