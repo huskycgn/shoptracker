@@ -39,7 +39,7 @@ for m in marketdict:
 
 for market in marketinstancelist:
     try:
-        categories = market.getofferszen()
+        categories = market.getoffercs()
         for cat in categories:
             # print(cat)
             offerlist = cat["offers"]
@@ -72,5 +72,6 @@ for w in wantedlist:
                 p.store.city,
                 p.store.openuntil,
             )
-#             string_to_send = f"{p.name} {p.price} {p.store.name} {p.store.street} {p.store.zipcode} {p.store.city} {p.store.openuntil}"
-# send_telegram(string_to_send)
+            string_to_send = f"{p.name} {p.price} {p.store.name} {p.store.street} {p.store.zipcode} {p.store.city} {p.store.openuntil}"
+
+            send_telegram(string_to_send)

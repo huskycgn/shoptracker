@@ -1,5 +1,4 @@
-from zenrows import ZenRowsClient
-from cred import API_KEY
+import cloudscraper
 
 
 class Market:
@@ -11,14 +10,11 @@ class Market:
         self.street = street
         self.marketid = marketid
 
-    def getofferszen(self):
-        urlstring = (
-            f"https://mobile-api.rewe.de/api/v3/all-offers?marketCode={self.marketid}"
-        )
-        client = ZenRowsClient(API_KEY)
-
-        response = client.get(urlstring)
-        return response.json()["categories"]
+    def getoffercs(self):
+        scraper = cloudscraper.create_scraper(delay=10, browser="chrome")
+        url = f"https://mobile-api.rewe.de/api/v3/all-offers?marketCode={self.marketid}"
+        result = scraper.get(url).json()["categories"]
+        return result
 
 
 class Product:
