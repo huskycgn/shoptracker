@@ -16,7 +16,7 @@ rawfile = [
 ]
 
 
-marketjson = getstorelist(50667)
+marketjson = getstorelistcs(50667)
 
 marketdict = marketjson
 
