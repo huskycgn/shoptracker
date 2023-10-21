@@ -1,5 +1,5 @@
 from classes import Market, Product
-from funcs import getstorelist, send_telegram
+from funcs import getstorelistcs, send_telegram
 from cred import PATH
 
 rawfile = [
