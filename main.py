@@ -65,20 +65,20 @@ with open(file=f"{PATH}liste.txt", mode="r") as rawfile:
 
 wantedlist = [i.strip() for i in wantedlist]
 
-print(wantedlist)
+# print(wantedlist)
 
 
 for w in wantedlist:
     for p in productinstancelist:
         if w.lower() in p.name.lower():
-            print(
-                p.name,
-                p.description,
-                p.price,
-                p.store.name,
-                p.store.street,
-                p.store.zipcode,
-                p.store.city,
+            # print(
+            #     p.name,
+            #     p.description,
+            #     p.price,
+            #     p.store.name,
+            #     p.store.street,
+            #     p.store.zipcode,
+            #     p.store.city,
                 # p.store.openuntil,
             )
             string_to_send = f"{p.name} \n{p.description} \n{p.price} \n{p.store.name} \n{p.store.street} \n{p.store.zipcode} {p.store.city}"
