@@ -1,4 +1,4 @@
-from classes import Market
+from classes import Market, Product
 from requests import request
 from pprint import pprint
 
@@ -13,6 +13,7 @@ marketjson = request(
 marketdict = marketjson.json()
 
 marketinstancelist = []
+productinstancelist = []
 
 for m in marketdict:
     # print(m)
@@ -27,15 +28,6 @@ for m in marketdict:
         )
     )
 
-# m1 = Market(
-#     name=marketdict[0]['companyName'],
-#     marketid=marketdict[0]['wwIdent'],
-#     street=marketdict[0]['contactStreet'],
-#     zipcode=marketdict[0]['contactZipCode'],
-#     city=marketdict[0]['contactCity'],
-#     openuntil=marketdict[0]['openingInfo']['isOpen']['until'],)
-
-# print(m1.__dict__)
 
 marketofferdict = {}
 
@@ -47,23 +39,25 @@ for market in marketinstancelist:
         for mo in marketoffers:
             # print(mo["title"])
             marketofferdict[market.marketid][mo["title"]] = mo["priceData"]["price"]
+            productinstancelist.append(
+                Product(
+                    store=market,
+                    name=mo["title"],
+                    price=mo["priceData"]["price"],
+                )
+            )
     except IndexError:
-        pprint("No offers")
+        continue
 
-# print(marketofferdict)
 
-# for o in marketofferdict:
-#     proddict = marketofferdict[o]
-#     if "Felix Katzennahrung" in proddict:
-#         print(proddict["Felix Katzennahrung"])
-#     else:
-#         print(False)
-
-for o in marketofferdict:
-    proddict = marketofferdict[o]
-    substring = "Felix"
-    result = {}
-    for keys, values in marketofferdict[o].items():
-        if substring in keys:
-            result[keys] = keys
-    print(result)
+for w in wantedlist:
+    for p in productinstancelist:
+        if w.lower() in p.name.lower():
+            print(
+                p.name,
+                p.price,
+                p.store.name,
+                p.store.street,
+                p.store.zipcode,
+                p.store.city,
+            )
