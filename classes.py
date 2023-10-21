@@ -18,7 +18,8 @@ class Market:
 
 
 class Product:
-    def __init__(self, name, price, store):
+    def __init__(self, name, price, store, description):
         self.store = store
         self.price = price
         self.name = name
+        self.description = description

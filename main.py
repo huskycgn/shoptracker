@@ -12,7 +12,6 @@ wantedlist = [
     "Beinscheibe",
     "Kohle",
     "Red Bull",
-    "Mozzarella",
 ]
 
 
@@ -51,7 +50,8 @@ for market in marketinstancelist:
                         Product(
                             store=market,
                             name=offer["title"],
-                            price=offer["priceData"]["price"] or None,
+                            price=offer["priceData"]["price"],
+                            description=offer["subtitle"],
                         )
                     )
                 else:
@@ -65,6 +65,7 @@ for w in wantedlist:
         if w.lower() in p.name.lower():
             print(
                 p.name,
+                p.description,
                 p.price,
                 p.store.name,
                 p.store.street,
