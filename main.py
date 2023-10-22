@@ -3,21 +3,22 @@ from funcs import getstorelistcs, send_telegram
 from cred import PATH
 import sys
 
-rawfile = [
-    "Cheddar",
-    "Felix",
-    "Aperol",
-    "Vodka",
-    "Avocado",
-    "Laktosefrei",
-    "Coca-Cola",
-    "Beinscheibe",
-    "Kohle",
-    "Red Bull",
-]
+# rawfile = [
+#     "Cheddar",
+#     "Felix",
+#     "Aperol",
+#     "Vodka",
+#     "Avocado",
+#     "Laktosefrei",
+#     "Coca-Cola",
+#     "Beinscheibe",
+#     "Kohle",
+#     "Red Bull",
+# ]
+# Left for testing purposes.
 
 argulist = sys.argv
-print(argulist)
+# print(argulist)
 
 errormessage = "No ZIP code provided!\nUsage like: $ main.py -zip 64283"
 

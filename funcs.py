@@ -1,4 +1,4 @@
-from cred import API_KEY, TELE_TOKEN, TELE_CHAT_ID
+from cred import TELE_TOKEN, TELE_CHAT_ID
 import telebot
 import cloudscraper
 
