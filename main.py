@@ -3,6 +3,11 @@ from funcs import getstorelistcs, send_telegram
 from cred import PATH
 import sys
 
+### Rewe blocked API Access ###
+### Script not longer functional ###
+### Seid ihr jetzt zufrieden, Rewe? ###
+
+
 # rawfile = [
 #     "Cheddar",
 #     "Felix",
